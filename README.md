@@ -1,10 +1,13 @@
 ## Robo4j-brick-tank-client
 Simple RasbpberryPi / Arduino demo client. The client is the tank platform.
+
 The platform supports following movements: forward, backward, left, right.
-client provides http server.
-#The internal sever is accessiable on the port 8085 and supports POST 
-request where no authentication is ne required.
-#example : <CLIENT_BRICK_IP>:8085
+The client provides http server.
+
+The internal sever is accessiable on the port 8085 and supports POST 
+request where no authentication is not required.
+
+example : <CLIENT_BRICK_IP>:8085
 
 POST reuest: 
 
