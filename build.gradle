@@ -14,25 +14,6 @@ repositories {
     mavenLocal()
 }
 
-/*
- * Copyright (C) 2016. Miro Kopecky (@miragemiko)
- * This build.gradle  is part of robo4j.
- * module: robo4j-brick-tank-client
- *
- * robo4j is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * robo4j is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with robo4j .  If not, see <http://www.gnu.org/licenses/>.
- */
-
 //create a single Jar with all dependencies
 task fatJar(type: Jar) {
     manifest {
@@ -48,7 +29,6 @@ task fatJar(type: Jar) {
 
 dependencies {
     compile "com.robo4j:robo4j-core:${robo4jVersion}"
-    compile "com.robo4j:robo4j-net:${robo4jVersion}"
     compile "com.robo4j:robo4j-rpi:${robo4jVersion}"
     testCompile "junit:junit:${junitVersion}@jar"
     testCompile "org.hamcrest:hamcrest-all:${hamcrestAllVersion}@jar"

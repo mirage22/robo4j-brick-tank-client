@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016. Miro Kopecky (@miragemiko)
+ * Copyright (C) 2016-2017. Miroslav Wengner, Marcus Hirt
  * This TankUtil.java  is part of robo4j.
  * module: robo4j-brick-tank-client
  *
@@ -14,31 +14,29 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with robo4j .  If not, see <http://www.gnu.org/licenses/>.
+ * along with robo4j .  If not, see <http://www.gnu.org/licenses/>.4j .  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.robo4j.rasp.tank.util;
 
-import com.pi4j.io.i2c.I2CDevice;
-
 import java.io.IOException;
 import java.util.Objects;
 
+import com.pi4j.io.i2c.I2CDevice;
+
 /**
- * @author Miro Kopecky (@miragemiko)
+ * @author Miro Wengner (@miragemiko)
  * @since 17.12.2016
  */
 public final class TankUtil {
 
+	public static boolean processCommand(I2CDevice device, byte[] command) throws IOException {
+		if (Objects.nonNull(device)) {
+			device.write(command);
+			return true;
+		} else {
+			throw new TankSystemException("device not available for command");
+		}
 
-    public static boolean processCommand(I2CDevice device, byte[] command) throws IOException{
-        if(Objects.nonNull(device)) {
-            device.write(command);
-            return true;
-        } else {
-            throw new TankSystemException("device not available for command");
-        }
-
-
-    }
+	}
 }

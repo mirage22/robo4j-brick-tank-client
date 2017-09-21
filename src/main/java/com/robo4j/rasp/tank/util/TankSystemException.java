@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016. Miro Kopecky (@miragemiko)
+ * Copyright (C) 2016-2017. Miroslav Wengner, Marcus Hirt
  * This TankSystemException.java  is part of robo4j.
  * module: robo4j-brick-tank-client
  *
@@ -14,21 +14,21 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with robo4j .  If not, see <http://www.gnu.org/licenses/>.
+ * along with robo4j .  If not, see <http://www.gnu.org/licenses/>.4j .  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.robo4j.rasp.tank.util;
 
 /**
- * @author Miro Kopecky (@miragemiko)
+ * @author Miro Wengner (@miragemiko)
  * @since 19.12.2016
  */
 public class TankSystemException extends RuntimeException {
-    public TankSystemException(String message) {
-        super(message);
-    }
+	public TankSystemException(String message) {
+		super(message);
+	}
 
-    public TankSystemException(String message, Throwable cause) {
-        super(message, cause);
-    }
+	public TankSystemException(String message, Throwable cause) {
+		super(message, cause);
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016. Miro Kopecky (@miragemiko)
+ * Copyright (C) 2016-2017. Miroslav Wengner, Marcus Hirt
  * This RpiMotorProvider.java  is part of robo4j.
  * module: robo4j-brick-tank-client
  *
@@ -14,10 +14,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with robo4j .  If not, see <http://www.gnu.org/licenses/>.
+ * along with robo4j .  If not, see <http://www.gnu.org/licenses/>.4j .  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.robo4j.rasp.tank.provider;
+
+import java.io.IOException;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CFactory;
@@ -30,47 +34,40 @@ import com.robo4j.rpi.motor.RpiDevice;
 import com.robo4j.rpi.motor.RpiMotor;
 import com.robo4j.rpi.motor.RpiMotorException;
 
-import java.io.IOException;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 /**
  * Engine provider is responsible for the specific motor creation and activation
  *
- * @author Miro Kopecky (@miragemiko)
+ * @author Miro Wengner (@miragemiko)
  * @since 21.12.2016
  */
 @RoboProvider(id = "engineProvider")
 public class RpiMotorProvider<Type extends RpiMotor> implements BaseRegistryProvider<RpiBaseMotor, Type> {
 
-    private static final int BUS_NUMBER = I2CBus.BUS_1;
+	private static final int BUS_NUMBER = I2CBus.BUS_1;
 
-    @Override
-    public RpiBaseMotor create(RpiMotor motor) {
-        RpiDevice device = (RpiDevice) motor;
-        try {
-            device.setBus(I2CFactory.getInstance(BUS_NUMBER));
-            device.setDevice(motor.getAddress());
-        } catch (IOException | I2CFactory.UnsupportedBusNumberException e) {
-            throw new RpiMotorException("wrong: ", e);
-        }
-        SimpleLoggingUtil.debug(getClass(), "port= " + ((RpiBaseMotor)device).getPort());
-        return (RpiBaseMotor) device;
-    }
+	@Override
+	public RpiBaseMotor create(RpiMotor motor) {
+		RpiDevice device = (RpiDevice) motor;
+		try {
+			device.setBus(I2CFactory.getInstance(BUS_NUMBER));
+			device.setDevice(motor.getAddress());
+		} catch (IOException | I2CFactory.UnsupportedBusNumberException e) {
+			throw new RpiMotorException("wrong: ", e);
+		}
+		SimpleLoggingUtil.debug(getClass(), "port= " + ((RpiBaseMotor) device).getPort());
+		return (RpiBaseMotor) device;
+	}
 
-    @Override
-    public Map<String, Type> activate(Map<String, Type> engines) {
-        return engines.entrySet().stream()
-                .peek(e -> {
-                    GenericMotor le = e.getValue();
-                    /* always instance of regulated motor */
-                    if(le instanceof RpiDevice){
-                        create((RpiMotor) le);
-                        SimpleLoggingUtil.debug(getClass(), "activate motor address: "
-                                + ((RpiBaseMotor)le).getAddress());
-                    }
-                    SimpleLoggingUtil.debug(getClass(), "activate not implemented yet");
-                })
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-    }
+	@Override
+	public Map<String, Type> activate(Map<String, Type> engines) {
+		return engines.entrySet().stream().peek(e -> {
+			GenericMotor le = e.getValue();
+			/* always instance of regulated motor */
+			if (le instanceof RpiDevice) {
+				create((RpiMotor) le);
+				SimpleLoggingUtil.debug(getClass(), "activate motor address: " + ((RpiBaseMotor) le).getAddress());
+			}
+			SimpleLoggingUtil.debug(getClass(), "activate not implemented yet");
+		}).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+	}
 }

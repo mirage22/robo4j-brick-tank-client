@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016. Miro Kopecky (@miragemiko)
+ * Copyright (C) 2016-2017. Miroslav Wengner, Marcus Hirt
  * This RightMotor.java  is part of robo4j.
  * module: robo4j-brick-tank-client
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with robo4j .  If not, see <http://www.gnu.org/licenses/>.
+ * along with robo4j .  If not, see <http://www.gnu.org/licenses/>.4j .  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.robo4j.rasp.tank.motor;
@@ -23,20 +23,19 @@ import com.robo4j.commons.annotation.RoboMotor;
 import com.robo4j.rpi.motor.RpiBaseMotor;
 
 /**
- * @author Miro Kopecky (@miragemiko)
+ * @author Miro Wengner (@miragemiko)
  * @since 17.12.2016
  */
 @RoboMotor(id = RightMotor.MOTOR_NAME)
 public class RightMotor extends RpiBaseMotor {
 
-    private static final int ARDUINO_ADDRESS = 0x04;
-    static final String MOTOR_NAME = "right";
+	private static final int ARDUINO_ADDRESS = 0x04;
+	static final String MOTOR_NAME = "right";
 
-    public RightMotor() {
-        super(ARDUINO_ADDRESS, (byte)2, 20);
-        this.port = 2;
-        this.speed = 40;
-    }
-
+	public RightMotor() {
+		super(ARDUINO_ADDRESS, (byte) 2, 20);
+		this.port = 2;
+		this.speed = 40;
+	}
 
 }
